@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang/glog"
-	"github.com/heroyf/cnccamp/lesson1/http_server/version"
+	"github.com/heroyf/cnccamp/lesson2/http_server/version"
 	"net"
 	"net/http"
 	"os"
@@ -12,21 +12,21 @@ import (
 )
 
 type Router struct {
-	handlers map[string]handlerFunc
+	Handlers map[string]handlerFunc
 }
 
 func newRouter() *Router {
-	return &Router{handlers: make(map[string]handlerFunc)}
+	return &Router{Handlers: make(map[string]handlerFunc)}
 }
 
 // addRoute add url route
 func (r *Router) addRoute(method string, url string, handler handlerFunc) {
-	r.handlers[method+"-"+url] = handler
+	r.Handlers[method+"-"+url] = handler
 }
 
 func (r *Router) handle(c *Context) {
 	key := c.Method + "-" + c.Url
-	if handler, ok := r.handlers[key]; ok {
+	if handler, ok := r.Handlers[key]; ok {
 		writeRespHeader(c.W, c.R)
 		handler(c)
 		ip, err := getClientIp(c.R)

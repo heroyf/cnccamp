@@ -9,17 +9,17 @@ import (
 type handlerFunc func(c *Context)
 
 type Engine struct {
-	router *Router
+	Router *Router
 }
 
 // New create engine object
 func New() *Engine {
-	return &Engine{router: newRouter()}
+	return &Engine{Router: newRouter()}
 }
 
 // addRoute
 func (e *Engine) addRoute(method string, url string, handler handlerFunc) {
-	e.router.addRoute(method, url, handler)
+	e.Router.addRoute(method, url, handler)
 }
 
 // Get add get route to route map
@@ -41,5 +41,5 @@ func (e *Engine) Run(addr string) (err error) {
 // ServerHttp handler func in map or return 404
 func (e *Engine) ServeHTTP(response http.ResponseWriter, request *http.Request) {
 	context := newContext(response, request)
-	e.router.handle(context)
+	e.Router.handle(context)
 }
