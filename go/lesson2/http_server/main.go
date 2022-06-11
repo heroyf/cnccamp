@@ -4,7 +4,7 @@ import "C"
 import (
 	"flag"
 	"github.com/golang/glog"
-	core "github.com/heroyf/cnccamp/lesson2/http_server/core"
+	core "github.com/heroyf/cnccamp/go/lesson2/http_server/core"
 	"net/http"
 )
 
