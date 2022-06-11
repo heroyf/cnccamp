@@ -3,7 +3,6 @@
 
 package main
 
-import "C"
 import (
 	"flag"
 	"github.com/golang/glog"
