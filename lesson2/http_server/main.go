@@ -8,11 +8,12 @@ import (
 	"github.com/golang/glog"
 	core "github.com/heroyf/cnccamp/go/lesson2/http_server/core"
 	"net/http"
+	"os"
 )
 
 func main() {
 	flag.Set("v", "4")
-	glog.V(2).Info("init http server...")
+	glog.V(os.Getenv("logLevel")).Info("init http server...")
 	engine := core.New()
 	engine.Get("/", func(c *core.Context) {
 		c.Html(http.StatusOK, "access to root")

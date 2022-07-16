@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-http-server
+spec:
+  selector:
+    matchLabels:
+      run: my-http-server
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: my-http-server
+    spec:
+      containers:
+        - name: my-http-server
+          env:
+            - name: logLevel
+              valueFrom:
+                configMapKeyRef:
+                  name: myenv
+                  key: loglevel
+            - name: hello_env
+              value: "hello from host"
+          image: heroyf/my_http_server:v3.1
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 2
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1000Mi
+            requests:
+              cpu: "0.5"
+              memory: 100Mi
+
+
+
