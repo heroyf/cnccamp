@@ -1,4 +1,4 @@
-# 通过service来暴露服务
+[# 通过service来暴露服务
 首先看deployment已经启动
 ![img.png](screenshots-homework2/img.png)
 编写service.yaml
@@ -100,9 +100,9 @@ kind: Ingress
 metadata:
   name: myhttpserver-gateway-cert-manager
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/issuer: letsencrypt-prod
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - myhttpserver.com
@@ -121,4 +121,4 @@ spec:
 ```
 因为为本地搭建的集群，所以域名不是真实存在的，所以申请的certs状态为false
 ![img_11.png](screenshots-homework2/img_11.png)
-![img_12.png](screenshots-homework2/img_12.png)
+![img_12.png](screenshots-homework2/img_12.png)]()
