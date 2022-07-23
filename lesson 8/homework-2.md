@@ -1,4 +1,4 @@
-[# 通过service来暴露服务
+# 通过service来暴露服务
 首先看deployment已经启动
 ![img.png](screenshots-homework2/img.png)
 编写service.yaml
