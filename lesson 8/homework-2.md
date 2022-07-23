@@ -1,9 +1,11 @@
-# 通过service来暴露服务
+c# 通过service来暴露服务
+
 首先看deployment已经启动
 
 ![img.png](screenshots-homework2/img.png)
 
 编写service.yaml
+
 ```yaml
 apiVersion: v1
 kind: Service
@@ -20,6 +22,7 @@ spec:
     run: my-http-server
   type: ClusterIP
 ```
+
 通过k create -f my-http-service.yaml来创建service，查看svc启动后暴露的ip，以及endpoints
 
 ![img_2.png](screenshots-homework2/img_2.png)
@@ -31,7 +34,9 @@ change ClusterIp -> NodePort
 ![img_3.png](screenshots-homework2/img_3.png)
 
 # 通过ingress来暴露服务
+
 ## 手动签发证书
+
 首先启动ingress-nginx-controller
 
 ![img_4.png](screenshots-homework2/img_4.png)
@@ -76,6 +81,7 @@ spec:
 ![img_7.png](screenshots-homework2/img_7.png)
 
 ## cert-manager签发证书
+
 创建cert-manager
 
 ![img_8.png](screenshots-homework2/img_8.png)
@@ -85,6 +91,7 @@ spec:
 ![img_9.png](screenshots-homework2/img_9.png)
 
 利用letsencrypt创建Issuer
+
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -107,6 +114,7 @@ spec:
 ![img_10.png](screenshots-homework2/img_10.png)
 
 修改ingress.yaml
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -132,7 +140,9 @@ spec:
                 port:
                   number: 80
 ```
+
 因为为本地搭建的集群，所以域名不是真实存在的，所以申请的certs状态为false
 
 ![img_11.png](screenshots-homework2/img_11.png)
-![img_12.png](screenshots-homework2/img_12.png)]()
+![img_12.png](screenshots-homework2/img_12.png)
+
