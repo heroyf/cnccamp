@@ -1,4 +1,4 @@
-c# 通过service来暴露服务
+# 通过service来暴露服务
 
 首先看deployment已经启动
 
@@ -23,7 +23,7 @@ spec:
   type: ClusterIP
 ```
 
-通过k create -f my-http-service.yaml来创建service，查看svc启动后暴露的ip，以及endpoints
+通过 k create -f my-http-service.yaml来创建service，查看svc启动后暴露的ip，以及endpoints
 
 ![img_2.png](screenshots-homework2/img_2.png)
 ![img_1.png](screenshots-homework2/img_1.png)
