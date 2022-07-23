@@ -146,3 +146,9 @@ spec:
 ![img_11.png](screenshots-homework2/img_11.png)
 ![img_12.png](screenshots-homework2/img_12.png)
 
+# 附录
+对应yaml可查看lesson 8同级目录下的
+- my-http-server-ingress.yaml
+- my-http-server-service.yaml
+- Issuer.yaml
+- my-http-server-ingress-cert-manager.yaml
