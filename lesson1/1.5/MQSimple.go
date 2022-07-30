@@ -27,7 +27,7 @@ func main() {
 func producerWith1Second(ch chan<- int, ctx context.Context) {
 	go func(ch chan<- int, ctx context.Context) {
 		ticker := time.NewTicker(1 * time.Second)
-		for _ = range ticker.C {
+		for range ticker.C {
 			select {
 			case <-ctx.Done():
 				fmt.Println("PRODUCER child process interrupt")

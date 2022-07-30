@@ -1,3 +1,4 @@
+> 图裂问题 git clone 到本地即可解决
 # 优雅启动
 
 通过liveprobe 和 readness probe来完成检测
