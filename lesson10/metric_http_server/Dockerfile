@@ -10,4 +10,8 @@ RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=on go build -a -installsuffix cgo  -o h
 FROM alpine:latest as prod
 WORKDIR /root/
 COPY --from=build /data/cnccamp/project/http_server /root/
-ENTRYPOINT ["./http_server"]
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+CMD ["./http_server"]
