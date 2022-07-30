@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-http-server-metrics
+spec:
+  selector:
+    matchLabels:
+      run: my-http-server
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+      labels:
+        run: my-http-server
+    spec:
+      containers:
+        - name: my-http-server
+          image: heroyf/my_http_server:v3.1-metrics
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 2
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1000Mi
+            requests:
+              cpu: "0.5"
+              memory: 100Mi
+
+
+
