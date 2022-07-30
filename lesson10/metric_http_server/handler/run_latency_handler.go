@@ -29,6 +29,8 @@ func (l LatencyHandler) GetHandleFunc() core.HandlerFunc {
 		// 添加0-2000ms的随机延时
 		delay := randInt(0, 2000)
 		time.Sleep(time.Millisecond * time.Duration(delay))
+		timer.Delay = float64(delay)
+		timer.ObserveDelay()
 		glog.V(4).Infof("delay: %d ms", delay)
 		c.Html(http.StatusOK, fmt.Sprintf("delay: %d ms", delay))
 	}

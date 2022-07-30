@@ -19,6 +19,7 @@ type ExecutionTimer struct {
 	histo *prometheus.HistogramVec
 	start time.Time
 	end   time.Time
+	Delay float64
 }
 
 // createExecutionTimeMetrics 创建http server执行时间指标
@@ -43,14 +44,9 @@ func Register() {
 
 // NewTimer 启动一个histogramVec的计时器
 func NewTimer() *ExecutionTimer {
-	return NewExecutionTime(latency)
-}
-
-// NewExecutionTime 启动一个histogramVec的计时器
-func NewExecutionTime(histo *prometheus.HistogramVec) *ExecutionTimer {
 	now := time.Now()
 	return &ExecutionTimer{
-		histo: histo,
+		histo: latency,
 		start: now,
 		end:   now,
 	}
@@ -59,4 +55,9 @@ func NewExecutionTime(histo *prometheus.HistogramVec) *ExecutionTimer {
 // ObserveTotal 计算使用总时长
 func (t *ExecutionTimer) ObserveTotal() {
 	(*t.histo).WithLabelValues("total").Observe(time.Now().Sub(t.start).Seconds())
+}
+
+// ObserveDelay 统计延迟时长
+func (t *ExecutionTimer) ObserveDelay() {
+	(*t.histo).WithLabelValues("delay").Observe(t.Delay)
 }
