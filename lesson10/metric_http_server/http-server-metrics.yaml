@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: my-http-server
-          image: heroyf/my_http_server:v3.1-metrics
+          image: heroyf/my_http_server:v3.1.1-metrics
           ports:
             - containerPort: 8080
           livenessProbe:
