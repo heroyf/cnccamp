@@ -52,12 +52,12 @@ func NewTimer() *ExecutionTimer {
 	}
 }
 
-// ObserveTotal 计算使用总时长
+// ObserveTotal 计算handler处理总时长
 func (t *ExecutionTimer) ObserveTotal() {
 	(*t.histo).WithLabelValues("total").Observe(time.Now().Sub(t.start).Seconds())
 }
 
-// ObserveDelay 统计延迟时长
+// ObserveDelay 计算handler延时
 func (t *ExecutionTimer) ObserveDelay() {
 	(*t.histo).WithLabelValues("delay").Observe(t.Delay)
 }
