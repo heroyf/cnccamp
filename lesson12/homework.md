@@ -77,3 +77,46 @@ root@master01:~/cnccamp/lesson12# curl --resolve httpsserver.cncamp.io:443:10.10
 ```
 
 ## open tracing 接入
+
+改造my_http_server，支持svc0 发往 svc1 最终发往 svc2
+```shell
+# 创建service0、service1、service2
+root@master01:~/cnccamp/lesson12# k create -f service0.yaml -n homework12
+root@master01:~/cnccamp/lesson12# k create -f service1.yaml -n homework12
+root@master01:~/cnccamp/lesson12# k create -f service2.yaml -n homework12
+```
+
+检查pod启动情况
+```shell
+root@master01:~/cnccamp/lesson12# k get pods -n homework12
+NAME                          READY   STATUS    RESTARTS   AGE
+httpserver-54fd74d8ff-bl2zl   2/2     Running   0          5h59m
+service0-84b6b9d9fd-lvqxf     2/2     Running   0          39m
+service1-58877cb6cc-bqm9w     2/2     Running   0          63m
+service2-69987f4797-qbrwf     2/2     Running   0          20m
+```
+
+创建virtualservice，新建规则
+
+```shell
+root@master01:~/cnccamp/lesson12# k create -f istio-svc-tracing.yaml
+```
+
+循环调用
+```shell
+root@master01:~/cnccamp/lesson12# for i in {1..100}; do curl --resolve httpsserver.cncamp.io:443:$INGRESS_IP https://httpsserver.cncamp.io/service0 -k; done
+```
+
+安装jaeger，并启动
+```shell
+root@master01:~/101/module12/istio/tracing# k create -f jaeger.yaml
+root@master01:~/101/module12/istio/tracing# istioctl dashboard jaeger --address=0.0.0.0
+http://0.0.0.0:16686
+Failed to open browser; open http://0.0.0.0:16686 in your browser.
+```
+
+查看tracing情况
+
+![img.png](screenshots/img.png)
+
+![img_1.png](screenshots/img_1.png)

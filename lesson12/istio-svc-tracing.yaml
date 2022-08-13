@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpsserver-svc
+spec:
+  gateways:
+    - httpsserver
+  hosts:
+    - httpsserver.cncamp.io
+  http:
+    - match:
+        - port: 443
+        - uri:
+            exact: "/service0"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: service0.homework12.svc.cluster.local
+            port:
+              number: 80
