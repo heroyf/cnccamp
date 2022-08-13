@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	Register("RootHandler", &MetricsHandler{})
+	Register("RootHandler", &RootHandler{})
 }
 
 type RootHandler struct{}
