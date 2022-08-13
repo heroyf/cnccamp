@@ -20,7 +20,8 @@ func main() {
 
 	engine := core.New()
 	engine.Get("/", func(c *core.Context) {
-		c.Html(http.StatusOK, "access to root")
+		h := handler.GetHandler("RootHandler")
+		h.GetHandleFunc()(c)
 	})
 	engine.Get("/delay", func(c *core.Context) {
 		h := handler.GetHandler("LatencyHandler")
