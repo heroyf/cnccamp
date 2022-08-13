@@ -3,9 +3,9 @@ package handler
 import (
 	"fmt"
 	"github.com/golang/glog"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/core"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/metrics"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/utils"
+	"github.com/heroyf/cnccamp/go/lesson12/service2/core"
+	"github.com/heroyf/cnccamp/go/lesson12/service2/metrics"
+	"github.com/heroyf/cnccamp/go/lesson12/service2/utils"
 	"net/http"
 	"time"
 )

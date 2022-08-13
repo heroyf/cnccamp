@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/core"
+	"github.com/heroyf/cnccamp/go/lesson12/service2/core"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

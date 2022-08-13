@@ -6,9 +6,9 @@ package main
 import (
 	"flag"
 	"github.com/golang/glog"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/core"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/handler"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/metrics"
+	"github.com/heroyf/cnccamp/go/lesson12/service0/core"
+	"github.com/heroyf/cnccamp/go/lesson12/service0/handler"
+	"github.com/heroyf/cnccamp/go/lesson12/service0/metrics"
 	"net/http"
 )
 

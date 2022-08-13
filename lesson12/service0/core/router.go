@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang/glog"
-	"github.com/heroyf/cnccamp/go/lesson10/metric_http_server/version"
+	"github.com/heroyf/cnccamp/go/lesson12/service0/version"
 	"net"
 	"net/http"
 	"os"

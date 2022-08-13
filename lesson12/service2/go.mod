@@ -1,4 +1,4 @@
-module github.com/heroyf/cnccamp/go/lesson10/metric_http_server
+module github.com/heroyf/cnccamp/go/lesson12/service2
 
 go 1.17
 
