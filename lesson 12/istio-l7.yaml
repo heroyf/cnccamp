@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpsserver-l7
+spec:
+  gateways:
+    - httpsserver
+  hosts:
+    - httpsserver.cncamp.io
+  http:
+    - match:
+        - port: 443
+        - uri:
+            exact: "/l7/header"
+      rewrite:
+        uri: "/header"
+      route:
+        - destination:
+            host: httpserver.homework12.svc.cluster.local
+            port:
+              number: 80
